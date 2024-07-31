@@ -2,12 +2,16 @@ using Mongo_Docker_API;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.AddServiceDefaults();
+builder.AddMongoDBClient("mongo");
+
 var app = builder.Build();
 
-app.MapGet("/", async () =>
+app.MapDefaultEndpoints();
+
+app.MapGet("/", async (IMongoClient client) =>
 {
-    string connectionString = "mongodb://admin:pass@mongo:27017/";
-    var client = new MongoClient(connectionString);
     var database = client.GetDatabase("MySuperiorDB");
     var collection = database.GetCollection<People>("People");
 
