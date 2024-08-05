@@ -8,7 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.Dapr" Version="8.1.0" />
     <PackageReference Include="Aspire.MongoDB.Driver" Version="8.0.1" />
+    <PackageReference Include="Dapr.AspNetCore" Version="1.14.0-rc02" />
     <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
   </ItemGroup>
 

@@ -1,0 +1,32 @@
+﻿# apiVersion: dapr.io/v1alpha1
+# kind: Component
+# metadata:
+#   name: statestore
+# spec:
+#   type: state.mongodb
+#   version: v1
+#   metadata:
+#   - name: host
+#     value: "192.168.86.36:27017"      # Depending on IPConfig
+#   - name: username
+#     value: "admin"
+#   - name: password
+#     value: "pass"
+#   - name: databaseName
+#     value: "MySuperiorDB"
+#   - name: collectionName
+#     value: "People"
+#   - name: params
+#     value: "?authSource=admin"
+
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: statestore
+spec:
+  type: state.redis
+  version: v1
+  initTimeout: 1m
+  metadata:
+  - name: redisHost
+    value: "localhost:6379"

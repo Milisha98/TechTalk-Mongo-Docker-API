@@ -1,22 +1,26 @@
+using Dapr.Client;
 using Mongo_Docker_API;
-using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
-builder.AddMongoDBClient("mongo");
+builder.Services.AddDaprClient();
+//builder.AddMongoDBClient("mongo");
 
 var app = builder.Build();
 
 app.MapDefaultEndpoints();
 
-app.MapGet("/", async (IMongoClient client) =>
+app.MapGet("/", async (DaprClient client) =>
 {
-    var database = client.GetDatabase("MySuperiorDB");
-    var collection = database.GetCollection<People>("People");
+    // Save a new Record
+    var person = new People { Id = 7, Name = "Foo Bar" };
+    await client.SaveStateAsync<People>("statestore", "7", person);
 
-    var people = await collection.Find<People>(_ => true).ToListAsync();
+    // Fetch a Record
+    var people = await client.GetStateAsync<People>("statestore", "5");
     return people;
+
 });
 
 
