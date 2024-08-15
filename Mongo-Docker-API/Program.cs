@@ -18,7 +18,7 @@ app.MapGet("/", async (DaprClient client) =>
     await client.SaveStateAsync<People>("statestore", "7", person);
 
     // Fetch a Record
-    var people = await client.GetStateAsync<People>("statestore", "5");
+    var people = await client.GetStateAsync<People>("statestore", "7");
     return people;
 
 });
