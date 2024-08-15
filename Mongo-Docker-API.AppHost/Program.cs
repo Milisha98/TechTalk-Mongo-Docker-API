@@ -1,8 +1,8 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
 var mongo = builder
-            .AddMongoDB("mongo")
-            .WithDataVolume("my-mongo-api")
+            .AddMongoDB(name: "mongo")
+            .WithDataVolume(name: "my-mongo-api")
             .WithMongoExpress();
 
 builder
